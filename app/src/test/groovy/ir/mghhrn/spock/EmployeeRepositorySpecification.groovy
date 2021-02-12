@@ -31,7 +31,7 @@ class EmployeeRepositorySpecification extends Specification {
      */
     def setupSpec() {}    // runs once -  before the first feature method
     def setup() {         // runs before every feature method
-        employeeRepository = new EmployeeRepositoryImpl();
+        employeeRepository = new EmployeeRepositoryImpl()
     }
     def cleanup() {}      // runs after every feature method
     def cleanupSpec() {}  // runs once -  after the last feature method
@@ -52,15 +52,15 @@ class EmployeeRepositorySpecification extends Specification {
 
         then:
         verifyAll(employee) {
-            getFirstName() == "John"
-            getLastName() == "Doe"
+            firstName == "John"
+            lastName == "Doe"
         }
         someInt == 13
         notThrown(NoSuchElementException)
 
         // the expect block should be used for purely functional methods
         expect:
-        employee.getTotalWorkedHour() == 100L
+        employee.totalWorkedHour == 100L
     }
 
 
@@ -84,13 +84,13 @@ class EmployeeRepositorySpecification extends Specification {
     }
 
     // data-driven testing
-    def "employees with id 1, 2, 3 are existed with their exact 'workedHour'"() {
+    def "employees with id 1, 2, and 3 are existed with their exact 'workedHour'    "() {
         given:
         Employee employee = employeeRepository.getEmployeeById(id).get()
 
         expect:
         with(employee) {
-            employeeMatchesWithIdAndFirstNameAndWorkedHour(employee, getFirstName(), getTotalWorkedHour())
+            employeeMatchesWithIdAndFirstNameAndWorkedHour(employee, name, workedHour)
             getId() == id
         }
 
